@@ -122,6 +122,40 @@ Weather_details
     box-shadow: 0 0 15px var(--glow);
     transform: translateY(-2px); /* Slight lift effect */
 }
+/* Mobile Optimization for Details Page */
+@media screen and (max-width: 480px) {
+    /* 1. Fix the main card container */
+    .weather-display {
+        width: 92% !important; /* Take up more screen width */
+        padding: 20px !important; /* Reduce large desktop padding */
+        margin: 10px auto;
+        border-radius: 20px;
+    }
+
+    /* 2. Adjust the Grid (make items side-by-side but smaller) */
+    .details-grid {
+        grid-template-columns: 1fr 1fr; /* Keep 2 columns but reduce gaps */
+        gap: 8px;
+        margin-top: 15px;
+    }
+
+    .detail-item {
+        padding: 10px;
+        font-size: 0.85rem;
+    }
+
+    /* 3. Shrink the huge temperature text for small screens */
+    .main-temp {
+        font-size: 3rem !important; 
+        margin: 5px 0 !important;
+    }
+
+    /* 4. Fix the button width so it doesn't poke out */
+    .btn-back {
+        width: 80%;
+        padding: 10px 20px;
+    }
+}
 </style>
 {% endblock %}
 {% endblock %}
