@@ -69,6 +69,10 @@ html {
     padding: 14px;
     color: white;
     transition: 0.3s;
+    width: 100%;
+    max-width: 100%;
+    display: block;
+    box-sizing: border-box;
 }
 
 .form-input:focus {
