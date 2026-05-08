@@ -1,0 +1,48 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block title %}
+weather_app
+{% endblock %}
+
+{% block content %}
+    <div class="weather-container" id="weather-search-box">
+    <h2 class="title">Weather Forecast</h2>
+    
+    <form action="{% url 'details' %}" method="GET" class="weather-form" id="weatherForm">
+        
+        <div class="input-group">
+            <label for="country">Country:</label>
+            <input type="text" 
+                   name="country" 
+                   id="country" 
+                   class="form-input" 
+                   placeholder="e.g. US or United States">
+        </div>
+
+        <div class="input-group">
+            <label for="state">State/Province:</label>
+            <input type="text" 
+                   name="state" 
+                   id="state" 
+                   class="form-input" 
+                   placeholder="e.g. New York">
+        </div>
+
+        <div class="input-group">
+            <label for="city">City:</label>
+            <input type="text" 
+                   name="city" 
+                   id="city" 
+                   class="form-input" 
+                   placeholder="e.g. Manhattan" 
+                   required>
+        </div>
+
+        <button type="submit" class="btn-submit" id="getWeatherBtn">
+            Check Weather
+        </button>
+        
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,127 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block title %}
+Weather_details
+{% endblock %}
+
+{% block content %}
+    <div class="modal-overlay">
+    
+    <div class="weather-display weather-{{ data.weather.0.main }}" id="weatherDisplayCard">
+        
+        <div class="card-header">
+            <h2 class="location-name" id="displayCity">
+                {{ data.name }}<span class="country-code">, {{ data.sys.country }}</span>
+            </h2>
+            <p class="weather-status" id="weatherDesc">
+                {{ data.weather.0.description|capfirst }}
+            </p>
+        </div>
+
+        <div class="temp-section">
+            <img src="http://openweathermap.org/img/wn/{{ data.weather.0.icon }}@2x.png" 
+                 alt="weather icon" class="weather-icon">
+            <h1 class="main-temp">{{ data.main.temp|stringformat:"i" }}°C</h1>
+        </div>
+
+        <div class="details-grid">
+            <div class="detail-item">
+                <span class="label">Feels Like</span>
+                <span class="value">{{ data.main.feels_like|stringformat:"i" }}°C</span>
+            </div>
+            <div class="detail-item">
+                <span class="label">Humidity</span>
+                <span class="value">{{ data.main.humidity }}%</span>
+            </div>
+            <div class="detail-item">
+                <span class="label">Wind</span>
+                <span class="value">{{ data.wind.speed }} m/s</span>
+            </div>
+            <div class="detail-item">
+                <span class="label">Pressure</span>
+                <span class="value">{{ data.main.pressure }} hPa</span>
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <a href="{% url 'myrequest' %}" class="btn-back" id="backBtn">
+                Search Another City
+            </a>
+        </div>
+        
+    </div>
+</div>
+{% block extra_css %}
+<style>
+    /* --- MODAL OVERLAY --- */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    backdrop-filter: blur(12px); /* The background blur */
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* --- WEATHER CARD --- */
+.weather-display {
+    background: var(--card-dark);
+    padding: 40px;
+    border-radius: 28px;
+    text-align: center;
+    width: 90%;
+    max-width: 350px;
+    border-top: 4px solid var(--weather-color); /* Changes via dynamic class */
+    box-shadow: 0 0 30px var(--glow);             /* Changes via dynamic class */
+}
+
+/* --- DYNAMIC WEATHER THEMES --- */
+.weather-Clear { --weather-color: #f1c40f; --glow: rgba(241, 196, 15, 0.2); }
+.weather-Clouds { --weather-color: #bdc3c7; --glow: rgba(189, 195, 199, 0.1); }
+.weather-Rain { --weather-color: #3498db; --glow: rgba(52, 152, 219, 0.2); }
+.weather-Thunderstorm { --weather-color: #9b59b6; --glow: rgba(155, 89, 182, 0.2); }
+.weather-Snow { --weather-color: #ecf0f1; --glow: rgba(236, 240, 241, 0.3); }
+.weather-Drizzle { --weather-color: #48c9b0; --glow: rgba(72, 201, 176, 0.2); }
+
+/* --- DATA STYLING --- */
+.main-temp { font-size: 4.5rem; margin: 10px 0; font-weight: 800; }
+.details-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 10px; 
+    margin-top: 25px; 
+}
+.detail-item { 
+    background: rgba(255,255,255,0.03); 
+    padding: 15px; 
+    border-radius: 15px; 
+}
+/* Styling the "Search Another City" link as a button */
+.btn-back {
+    display: inline-block;
+    margin-top: 25px;       /* Adds space above the button */
+    padding: 12px 30px;    /* Adds space inside the button (top/bottom, left/right) */
+    background: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--accent-blue);
+    border-radius: 50px;   /* Makes it a pill shape */
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+}
+
+.btn-back:hover {
+    background: var(--accent-blue);
+    color: #000;           /* Text turns dark when button turns bright blue */
+    box-shadow: 0 0 15px var(--glow);
+    transform: translateY(-2px); /* Slight lift effect */
+}
+</style>
+{% endblock %}
+{% endblock %}
