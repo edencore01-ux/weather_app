@@ -111,24 +111,27 @@ html {
 }
 
 /* For Mobile Phones (Portrait) */
-@media (max-width: 480px) {
+@media screen and (max-width: 480px) {
     .title {
         font-size: 1.8rem;
         margin-bottom: 20px;
     }
 
     .weather-form {
-        padding: 20px;
+        padding: 15px;
         border-radius: 18px;
+        margin: 10px auto;
+        width: 90%;
     }
 
     .weather-display {
         padding: 25px 15px;
         width: 90%;
+        margin: 10px auto;
     }
 
     .main-temp {
-        font-size: 3rem;
+        font-size: 2rem;
     }
 
     .details-grid {
